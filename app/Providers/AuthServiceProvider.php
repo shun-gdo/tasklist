@@ -21,6 +21,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        //リンクをhttpsにする設定
+        \URL::forceScheme('https');
     }
 }
