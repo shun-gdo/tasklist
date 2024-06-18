@@ -15,15 +15,28 @@
             </div>
             
             <dialog id="my_modal_{{ $task->id }}" class="modal">
+            
+                
                 <div class="modal-box">
-                    <h3 class="font-bold text-lg">{{$task->content}}</h3>
-
+                    
+                    <label class="input input-bordered flex items-center gap-2">
+                        <input type="text" class="grow font-bold" value="{{$task->content}}" />
+                    </label>
+                    
+                    
+                    <div class="edit-actions">
+                        <button class="btn" onclick="">
+                            Submit
+                        </button>
+                    </div>
+                    
                     <div class="modal-action">
                         <form method="dialog">
                             <!-- if there is a button in form, it will close the modal -->
                             <button class="btn">Close</button>
                         </form>
                     </div>
+                    
                 </div>
             </dialog>
 
