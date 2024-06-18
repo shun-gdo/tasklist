@@ -17,6 +17,11 @@
         <th>メッセージ
         <th>{{ $task->content }}</th>
     </tr>
+   
+    <tr>
+        <th>ステータス
+        <th>{{ $task->status }}</th>
+    </tr>
     </table>
 
     {{-- メッセージ編集ページへのリンク --}}

@@ -14,6 +14,10 @@
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
                     {{ $task->content }}
                 </h5>
+                
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                    {{ $task->status }}
+                </h5>
             </div>
         </a>
             <!--<dialog id="my_modal_{{ $task->id }}" class="modal">-->
