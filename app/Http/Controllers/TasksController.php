@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Task;
 
+
 class TasksController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class TasksController extends Controller
         
         return view('tasks.index' , [
             'tasks' => $tasks,
-            ]);
+        ]);
     }
 
     /**
@@ -27,6 +28,11 @@ class TasksController extends Controller
     public function create()
     {
         //
+        $task = new Task;
+        
+        return view('tasks.create',[
+            'tasks' => $task,
+        ]);
     }
 
     /**
@@ -35,6 +41,11 @@ class TasksController extends Controller
     public function store(Request $request)
     {
         //
+        $task = new Task;
+        $task->content = $request->content;
+        $task->save();
+        
+        return redirect('/');
     }
 
     /**
@@ -43,6 +54,11 @@ class TasksController extends Controller
     public function show(string $id)
     {
         //
+        $task = Task::findOrFail($id);
+        
+        return view('tasks.show',[
+            'task' => $task,
+        ]);
     }
 
     /**
@@ -69,7 +85,7 @@ class TasksController extends Controller
         $task->content = $request->content;
         $task->save();
         
-        return redirect('/');
+        return redirect(route('tasks.index'));;
     }
 
     /**
@@ -78,10 +94,10 @@ class TasksController extends Controller
     public function destroy(string $id)
     {
         //
-        $task = Task::findorFail($id);
+        $task = Task::findOrFail($id);
         
         $task->delete();
         
-        return redirect('/');
+        return route('tasks.index');
     }
 }

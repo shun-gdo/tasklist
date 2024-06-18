@@ -15,14 +15,14 @@ use App\Http\Controllers\TasksController;
 |
 */
 
-Route::get('/', [TaskController::class, 'index']);
+Route::get('/', [TasksController::class, 'index']);
 Route::resource('tasks',TasksController::class);
 
-Route::get('tasks/{id}',[TasksController::class,'show']);
-Route::get('tasks',[TasksController::class,'index'])->name('tasks.index');
+// Route::get('tasks/{id}',[TasksController::class,'show']);
+// Route::get('tasks',[TasksController::class,'index'])->name('tasks.index');
 
-Route::post('tasks',[TasksController::class,'store']);
-Route::post('tasks/create',[TasksController::class,'create']);
+// Route::post('tasks',[TasksController::class,'store']);
+// Route::post('tasks/create',[TasksController::class,'create']);
 
-Route::put('tasks/{id}',[TasksController::class,'update']);
-Route::delete('tasks/{id}',[TasksController::class,'destroy']);
+// Route::put('tasks/{id}',[TasksController::class,'update']);
+// Route::delete('tasks/{id}',[TasksController::class,'destroy']);
