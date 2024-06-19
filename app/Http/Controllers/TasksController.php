@@ -97,7 +97,7 @@ class TasksController extends Controller
         $task->status = $request->status;
         $task->save();
         
-        return redirect(route('tasks.index'));;
+        return redirect('/');
     }
 
     /**
@@ -110,6 +110,6 @@ class TasksController extends Controller
         
         $task->delete();
         
-        return route('tasks.index');
+        return redirect('/');
     }
 }
