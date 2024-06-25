@@ -14,7 +14,7 @@ console_command = 'php /var/www/html/artisan tinker'
 
 [env]
   APP_URL = 'https://tasklist-dry-morning-5378.fly.dev'
-  APP_NAME = 'tasklist-dry-morning'
+  APP_NAME = 'tasklist-dry-morning-5378'
   APP_ENV = 'production'
   APP_DEBUG = false
   DB_CONNECTION = 'pgsql'

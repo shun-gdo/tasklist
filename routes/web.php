@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [TasksController::class, 'index']);
+Route::resource('tasks',TasksController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('tasks/{id}',[TasksController::class,'show']);
+// Route::get('tasks',[TasksController::class,'index'])->name('tasks.index');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::post('tasks',[TasksController::class,'store']);
+// Route::post('tasks/create',[TasksController::class,'create']);
 
-require __DIR__.'/auth.php';
+// Route::put('tasks/{id}',[TasksController::class,'update']);
+// Route::delete('tasks/{id}',[TasksController::class,'destroy']);
