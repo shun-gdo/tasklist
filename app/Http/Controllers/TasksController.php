@@ -15,7 +15,7 @@ class TasksController extends Controller
     public function index()
     {
         //
-        $tasks = Task::all();
+        $tasks = Task::where('user_id', '=' ,\Auth::id())->get();
         
         return view('tasks.index' , [
             'tasks' => $tasks,
@@ -49,6 +49,7 @@ class TasksController extends Controller
         $task = new Task;
         $task->content = $request->content;
         $task->status = $request->status;
+        $task->user_id = \Auth::id();
         $task->save();
         
         return redirect('/');
@@ -62,9 +63,13 @@ class TasksController extends Controller
         //
         $task = Task::findOrFail($id);
         
-        return view('tasks.show',[
-            'task' => $task,
-        ]);
+        if($task->user_id === \Auth::id()){
+            return view('tasks.show',[
+                'task' => $task,
+            ]);
+        }else{
+            return redirect('/')->withErrors(['error'=>'you have no rights to access this task']);
+        }
     }
 
     /**
@@ -74,10 +79,14 @@ class TasksController extends Controller
     {
         //
         $task = Task::findOrFail($id);
-        
-        return view('tasks.edit',[
-            'task' => $task,
+        if($task->user_id === \Auth::id()){
+            
+            return view('tasks.edit',[
+                'task' => $task,
             ]);
+        }else{
+            return redirect('/')->withErrors(['error'=>'you have no rights to access this task']);
+        }
     }
 
     /**
@@ -85,19 +94,24 @@ class TasksController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'content'=>'required',
-            'status'=>'required|max:10',
-        ]);
         
-        //
         $task = Task::findOrFail($id);
         
-        $task->content = $request->content;
-        $task->status = $request->status;
-        $task->save();
+        if($task->user_id === \Auth::id()){
+            
+            $request->validate([
+                'content'=>'required',
+                'status'=>'required|max:10',
+            ]);
         
-        return redirect('/');
+            $task->content = $request->content;
+            $task->status = $request->status;
+            $task->save();
+            return redirect('/');
+        }else{
+            return redirect('/')->withErrors(['error'=>'you have no rights to access this task']);
+        }
+        
     }
 
     /**
@@ -108,8 +122,12 @@ class TasksController extends Controller
         //
         $task = Task::findOrFail($id);
         
-        $task->delete();
+        if($task->user_id === \Auth::id()){
+            $task->delete();
+            return redirect('/');
+        }else{
+            return redirect('/')->withErrors(['error'=>'you have no rights to access this task']);
+        }
         
-        return redirect('/');
     }
 }
